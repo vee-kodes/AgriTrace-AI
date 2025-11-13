@@ -36,5 +36,14 @@ app.use('/api/activities', activityRoutes);
 app.use('/api/collections', collectionRoutes);
 app.use('/api/ai', aiRoutes);
 
+// Health check 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    message: 'AgriTrace AI backend is running!',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Listener
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
