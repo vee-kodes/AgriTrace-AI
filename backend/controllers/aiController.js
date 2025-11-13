@@ -7,10 +7,9 @@ const Collection = require('../models/Collection.js');
 dotenv.config();
 
 // Initialize OpenAI client
-
-// const openai = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 // Helper function to call OpenAI
 const getOpenAICompletion = async (prompt, model = 'gpt-3.5-turbo', response_format = { type: "text" }) => {
