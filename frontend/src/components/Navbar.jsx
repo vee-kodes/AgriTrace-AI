@@ -1,11 +1,13 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import { CheckCircleIcon, UserGroupIcon, ChartBarIcon, DocumentTextIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { CheckCircleIcon, UserGroupIcon, ChartBarIcon, DocumentTextIcon, PlusIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -159,7 +161,7 @@ export default function Navbar() {
             )}
             
             {/* Auth Button */}
-            <div className="ml-6">
+            <div className="ml-6 flex items-center">
               {user ? (
                 <>
                   <span className="hidden sm:inline mr-3 text-sm font-medium text-gray-300">
@@ -181,10 +183,119 @@ export default function Navbar() {
                   Login
                 </Link>
               )}
+              {/* Hamburger Menu Button */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="sm:hidden ml-2 p-2 text-gray-300 hover:text-white"
+              >
+                {isOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="sm:hidden bg-gray-800 border-t border-gray-700">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {user && user.role === 'Admin' && (
+              <Link
+                to="/dashboard"
+                className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                onClick={() => setIsOpen(false)}
+              >
+                <ChartBarIcon className="inline mr-2 h-5 w-5" /> Dashboard
+              </Link>
+            )}
+            {(user?.role === 'Admin' || user?.role === 'FieldOfficer') && (
+              <>
+                <Link
+                  to="/farmers"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <UserGroupIcon className="inline mr-2 h-5 w-5" /> Farmers
+                </Link>
+                <Link
+                  to="/register-farmer"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <PlusIcon className="inline mr-2 h-5 w-5" /> Register Farmer
+                </Link>
+                <Link
+                  to="/record-collection"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <DocumentTextIcon className="inline mr-2 h-5 w-5" /> Produce Intake
+                </Link>
+                <Link
+                  to="/add-activity"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <PlusIcon className="inline mr-2 h-5 w-5" /> Log Farm Operation
+                </Link>
+              </>
+            )}
+            {!user && (
+              <>
+                <Link
+                  to="/"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/about"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  About Us
+                </Link>
+                <Link
+                  to="/features"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Features
+                </Link>
+                <Link
+                  to="/how-it-works"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  How It Works
+                </Link>
+                <Link
+                  to="/roles"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  For Your Team
+                </Link>
+                <Link
+                  to="/contact"
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Contact
+                </Link>
+              </>
+            )}
+            {user && (
+              <div className="px-3 py-2">
+                <span className="text-sm font-medium text-gray-300">
+                  Welcome, {user.name} ({user.role})
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
