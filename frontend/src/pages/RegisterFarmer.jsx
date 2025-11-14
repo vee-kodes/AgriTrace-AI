@@ -56,8 +56,8 @@ export default function RegisterFarmer() {
   };
 
   return (
-    <div className="mx-auto max-w-lg">
-      <div className="rounded-lg bg-white p-8 shadow">
+    <div className="mx-auto max-w-lg px-4 sm:px-0">
+      <div className="rounded-lg bg-white p-4 sm:p-8 shadow">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Register New Farmer
         </h2>
