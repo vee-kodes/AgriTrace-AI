@@ -5,6 +5,9 @@ const Farmer = require('../models/Farmer.js');
 // POST /api/activities
 // @access  Private (Admin, FieldOfficer)
 const addActivity = async (req, res) => {
+  if (req.user.isDemo) {
+    return res.status(403).json({ message: 'Demo accounts are read-only' });
+  }
   const {
     farmerId,
     type,

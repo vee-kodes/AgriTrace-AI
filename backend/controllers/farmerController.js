@@ -6,6 +6,9 @@ const Collection = require('../models/Collection.js');
 // POST /api/farmers
 // @access  Private (Admin, FieldOfficer)
 const registerFarmer = async (req, res) => {
+  if (req.user.isDemo) {
+    return res.status(403).json({ message: 'Demo accounts are read-only' });
+  }
   const {name, region, contact, contractedCrop, contractId} = req.body;
   try {
     const farmer = await Farmer.create({
@@ -69,6 +72,9 @@ const getFarmerById = async (req, res) => {
 // PUT /api/farmers/:id
 // @access  Private (Admin, FieldOfficer)
 const updateFarmer = async (req, res) => {
+  if (req.user.isDemo) {
+    return res.status(403).json({ message: 'Demo accounts are read-only' });
+  }
   try {
     const farmer = await Farmer.findById(req.params.id);
     if (!farmer) {
@@ -99,6 +105,9 @@ const updateFarmer = async (req, res) => {
 // DELETE /api/farmers/:id
 // @access  Private (Admin, FieldOfficer)
 const deleteFarmer = async (req, res) => {
+  if (req.user.isDemo) {
+    return res.status(403).json({ message: 'Demo accounts are read-only' });
+  }
   try {
     const farmer = await Farmer.findById(req.params.id);
     if (!farmer) {

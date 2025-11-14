@@ -5,6 +5,9 @@ const Farmer = require('../models/Farmer.js');
 // POST /api/collections
 // @access  Private (Admin, FieldOfficer)
 const recordCollection = async (req, res) => {
+  if (req.user.isDemo) {
+    return res.status(403).json({ message: 'Demo accounts are read-only' });
+  }
   const {
     farmerId,
     crop,
@@ -48,6 +51,9 @@ const recordCollection = async (req, res) => {
 // PUT /api/collections/:id/pay
 // @access  Private (Admin)
 const updatePaymentStatus = async (req, res) => {
+  if (req.user.isDemo) {
+    return res.status(403).json({ message: 'Demo accounts are read-only' });
+  }
   try {
     const collection = await Collection.findById(req.params.id);
     if (!collection) {

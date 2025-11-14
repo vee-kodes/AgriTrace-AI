@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema(
       enum: ['Admin', 'FieldOfficer'],
       default: 'FieldOfficer',
     },
+    isDemo: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

@@ -25,6 +25,7 @@ const registerUser = async (req, res) => {
       email,
       password,
       role,
+      isDemo: email.includes('demo') ? true : false,
     });
 
     if (user) {
