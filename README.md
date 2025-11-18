@@ -96,6 +96,15 @@ Note: Demo users have read-only access and cannot modify data.
 
 ---
 
+## 🎥 Demo Video
+
+[Watch the demo](https://www.dropbox.com/scl/fi/h1yxioxi5jy3vp07boxv0/AgriTrace-AI_Demo.mp4?rlkey=7480b05c8n6041kpmoxp8ut96&st=ntl58aod&dl=0)
+
+If the video doesn't load, [watch the demo here](https://www.dropbox.com/scl/fi/h1yxioxi5jy3vp07boxv0/AgriTrace-AI_Demo.mp4?rlkey=7480b05c8n6041kpmoxp8ut96&st=ntl58aod&dl=0).
+
+---
+
+
 
 ## Installation and Setup
 
